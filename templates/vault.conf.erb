@@ -1,0 +1,22 @@
+#Upstart for Vault
+description "Vault Up Start Service(Upstart)"
+
+start on (local-filesystems and net-device-up IFACE!=lo)
+stop on runlevel [06]
+
+
+PIDFILE=<%= scope.lookupvar('vault::pid_file') %>
+LOGFILE=<%= scope.lookupvar('vault::logs_dir') %>/vault.log
+VAULT_INCLUDE='<%= scope.lookupvar('vault::install_dir') %>/vault/vault server -config=<%= scope.lookupvar('vault::conf_dir') %>/config.hcl'
+RUNAS=<%= scope.lookupvar('vault::user') %>
+CMD="$VAULT_INCLUDE &> \"$LOGFILE\" & echo \$!"
+
+exec su -c "$CMD" $RUNAS > "$PIDFILE"
+
+return $?
+
+
+respawn
+respawn limit 10 10
+
+
