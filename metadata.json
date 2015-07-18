@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "author": "Costya Regev (Costya.regev@me.com)",
   "summary": "Configures Vault by Hashicorp",
-  "source": "https://github.com/",
-  "project_page": "https://github.com/",
-  "issues_url": "https://github.com/",
+  "source": "https://github.com/CostyaRegev/puppet-vault/",
+  "project_page": "https://github.com/CostyaRegev/puppet-vault/",
+  "issues_url": "https://github.com/CostyaRegev/puppet-vault/issues",
   "description": "Installs & Configures Vault by Hashicorp",
   "dependencies": [
     { "name": "puppetlabs/stdlib","version_requirement": ">= 4.2.0 <5.0.0" },
