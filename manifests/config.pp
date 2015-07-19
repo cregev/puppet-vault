@@ -1,6 +1,6 @@
 # == [Class vault::config]
 #
-# [!] This class is called from vault::init to install the config file [!]
+# [!] This class is called from vault::init to configure the init_style [!]
 
 
 class vault::config inherits vault (

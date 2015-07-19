@@ -44,8 +44,8 @@ include '::vault'
 
 ####Private Classes
 
-* vault::config: Handles the configuration file.
-* vault::install: Handles the packages.
+* vault::config: Handles the configuration for the init_style.
+* vault::install: Handles the installation of directories,users,groups,config files ...
 * vault::service: Handles the service.
 
 

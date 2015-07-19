@@ -19,11 +19,11 @@ class vault::service inherits vault {
   }
   if $vault::service_manage{
     service { "${vault::service_name}":
-    ensure => $vault::service_ensure,
-    name   => $vault::service_name,
-    enable => $vault::service_enable,
-    hasstatus  => $vault::service_status,
-    hasrestart => $vault::service_restart,
+      ensure     => $vault::service_ensure,
+      name       => $vault::service_name,
+      enable     => $vault::service_enable,
+      hasstatus  => $vault::service_status,
+      hasrestart => $vault::service_restart,
+    }
   }
- }
 }

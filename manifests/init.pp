@@ -81,8 +81,6 @@ class vault (
 include 'stdlib'
 # {Full download URL}
   $real_download_url = pick($download_url, "${download_url_base}${version}_${os}_${arch}.${download_extension}")
-# Vault url Example: 
-# https://dl.bintray.com/mitchellh/vault/#vault_0.1.2_linux_amd64.zip ... just an example.
 
 # {Validate Paths & Booleans}
   # {Paths}
@@ -94,12 +92,10 @@ include 'stdlib'
   validate_absolute_path($version_dir)
   # {Booleans}
   validate_bool($manage_user)
-  validate_bool($manage_service)
   validate_bool($service_status)
   validate_bool($service_restart)
   validate_bool($service_enable)
   validate_bool($service_ensure)
-
 
   # {Anchor}
   anchor { 'vault::begin': } ->
