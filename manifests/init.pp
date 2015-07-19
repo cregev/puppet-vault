@@ -3,13 +3,38 @@
 # Installs, configures, and manages vault
 #
 # == [Parameters]
-#--------------
+#----------------
 # {version}
+# ---------
 # Specify version of vault to download.
-#
-# [*init_style*]
-#   What style of init your system uses.
-#
+# {vault_user}
+# ------------
+# The user which will run the Vault service.
+# {vault_group}
+# -------------
+# Vault group.
+# {install_dir}
+# -------------
+# Vault install directory
+# {version_dir}
+# --------------
+# Vault directory for installed version i.e vault-<Version_Number>
+# {config_dir}
+# ------------
+# Vault configuration directory for the config files
+# {logs_dir}
+# ----------
+# Vault directory which will hold the logs for the service.
+# {pid_path}
+# ----------
+# Vault directory for the pid of vault service.
+# {config_file}
+# -------------
+# Vault configuration file *.hcl
+# {*init_style*}
+# --------------
+# What style of init your system uses.
+
 # === [Authors]
 #
 # * Costya Regev <mailto:costya.regev@me.com>
@@ -27,7 +52,6 @@ class vault (
   $download_url_base     = $vault::params::download_url_base,
   $download_extension    = $vault::params::download_extension,
   $package_name          = $vault::params::package_name,
-  $package_ensure        = $vault::params::package_ensure,
   $listner_port          = $vault::params::listner_port,
   $backend_port          = $vault::params::backend_port,
   $backend_address       = $vault::params::backend_address,
