@@ -78,9 +78,9 @@ include 'stdlib'
 
 
   # {Anchor}
-  Anchor['vault_first::start'] 
-  -> Class['vault::config']
-  -> Class['vault::install']
-  -> Class['vault::service']
-  Anchor['vault_last::end']
+  anchor { 'vault::begin': } ->
+  class { '::vault::config': } ->
+  class { '::vault::install': } ~>
+  class { '::vault::service': } ->
+  anchor { 'vault::end': }
 }
