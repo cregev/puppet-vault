@@ -46,8 +46,10 @@ class vault::install inherits vault {
       
       }
   }
-    # {Download & Extract Vault and cleanup zip file}
-  ensure_packages(['unzip'])
+  # {Download & Extract Vault and cleanup zip file}
+  package{'unzip': 
+    ensure => installed 
+  }->
   archive { "Vault Download & Extract":
       source        => $vault::real_download_url,
       user          => $vault::vault_user,
@@ -55,7 +57,7 @@ class vault::install inherits vault {
       extract       => true,
       extract_path  => $vault::version_dir,
       cleanup       => true,
-    }
+    }->
     # { Link Version dir to Install dir.}
   file { "${vault::version_dir}":
     ensure => 'link',
