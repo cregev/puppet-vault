@@ -4,18 +4,19 @@
 
 
 class vault::config inherits vault (
-  $init_conf_ubuntu = '/etc/init/vault.conf',
-  $init_conf_genral = '/etc/init.d/vault') inherits vault {
+  $init_conf_upstart = '/etc/init/vault.conf',
+  $init_conf_genral = '/etc/init.d/vault',
+  $init_conf_systemd) inherits vault {
 
   # {Configure Init_style for different OS}
-  if $vaulta::init_style {
+  if $vault::init_style {
     case $vault::init_style {
       'upstart' : {
-        file { "${init_conf_ubuntu}":
+        file { "${init_conf_upstart}":
           mode    => '0444',
           owner   => $vault::vault_user,
           group   => $vault::vault_group,
-          content => template("${module_name}/vault.conf.erb"),
+          content => template("${module_name}/vault.conf.erb")
         }
       }
       'init_d' : {
@@ -24,6 +25,14 @@ class vault::config inherits vault (
           owner   => $vault::vault_user,
           group   => $vault::vault_group,
           content => template("${module_name}/vault.init.erb")
+        }
+      }
+      'systemd' : {
+        file { "${init_conf_systemd}":
+          mode    => '0644',
+          owner   => $vault::vault_user,
+          group   => $vault::vault_group,
+          content => template("${module_name}/vault.systemd.erb")
         }
       }
       default : {

@@ -1,3 +1,5 @@
+# [Note]: This file is managed by Puppet.
+
 backend "consul" {
   address = "<%= scope.lookupvar('vault::backend_address') %>:<%= scope.lookupvar('vault::backend_port') %>"
   path = "vault"

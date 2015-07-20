@@ -6,9 +6,6 @@
   "source": "https://github.com/CostyaRegev/puppet-vault/",
   "project_page": "https://github.com/CostyaRegev/puppet-vault/",
   "issues_url": "https://github.com/CostyaRegev/puppet-vault/issues",
-  "source": "https://github.com/",
-  "project_page": "https://github.com/",
-  "issues_url": "https://github.com/",
    "license": "Apache-2.0",
   "description": "Installs & Configures Vault by Hashicorp",
   "dependencies": [

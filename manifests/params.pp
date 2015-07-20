@@ -31,24 +31,30 @@ class vault::params {
   $os = downcase($::kernel)
   
 
-  if !($::osfamily in ['ubuntu', 'CentOS' , 'RedHat']) {
+  if !($::osfamily in ['Ubuntu', 'CentOS' , 'RedHat' , 'Fedora', 'Debian']) {
     fail("${module_name} does not support your osfamily ${::osfamily}")
   }
-
-  if $::operatingsystem == 'Ubuntu' {
-    if versioncmp($::lsbdistrelease, '8.04') < 1 {
-      $init_style = 'init_d'
-    } else {
-      $init_style = 'upstart'
-    }
-  } elseif $::operatingsystem =~ /CentOS|RedHat/ {
-      $init_style = 'init_d'
-  } else {
-        $init_style = undef
+  
+  $init_style = $::operatingsystem ? {
+    'Ubuntu'  => $::lsbdistrelease ? {
+      '8.04'  => 'init_d',
+      '15.04' => 'systemd',
+      default => 'upstart'
+    },
+    /CentOS|RedHat/      => $::operatingsystemmajrelease ? {
+      /(4|5|6)/ => 'init_d',
+      default   => 'systemd',
+    },
+    'Fedora'             => $::operatingsystemmajrelease ? {
+      /(12|13|14)/ => 'init_d',
+      default      => 'systemd',
+    },
+    'Debian'             => $::operatingsystemmajrelease ? {
+      /(4|5|6|7)/ => 'init_d',
+      default     => 'systemd'
+    },
+    default => 'init_d'
   }
-    if $init_style == undef {
-    fail('Unsupported OS')
-    }
   # {User and Group for the files and user to run the service as}
   case $::kernel {
     'Linux': {
