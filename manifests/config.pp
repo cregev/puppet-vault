@@ -5,8 +5,9 @@
 
 class vault::config inherits vault (
   $init_conf_upstart = '/etc/init/vault.conf',
-  $init_conf_genral = '/etc/init.d/vault',
-  $init_conf_systemd) inherits vault {
+  $init_conf_genral  = '/etc/init.d/vault',
+  $init_conf_systemd = '/lib/systemd/system/vault.service'
+) inherits vault {
 
   # {Configure Init_style for different OS}
   if $vault::init_style {
